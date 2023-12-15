@@ -8,6 +8,30 @@ public static class MathGen
 {
     private static System.Random random = new System.Random();
 
+    public static List<int> GenerateRandomWithoutRepeat(int count, int min, int max)
+    {
+        bool booleanJadid = true;
+        bool isEqualWithCurrentList = true;
+        List<int> result = new List<int>();
+        if (count > 1)
+        {
+            while (isEqualWithCurrentList)
+            {
+                result = GenerateRandom(count, min, max);
+                string randomListOfInt = string.Join(",", result);
+                if (!IsEqual(result, SetListInOrder(count)))
+                {
+                    isEqualWithCurrentList = false;
+                    Debug.Log(randomListOfInt);
+                }
+            }
+        }
+        else
+        {
+            result.Add(min);
+        }
+        return result;
+    }
     public static List<int> GenerateRandom(int count, int min, int max)
     {
         if (max <= min || count < 0 ||
@@ -38,13 +62,6 @@ public static class MathGen
         }
         return result;
     }
-    public void GetNewReference()
-    {
-
-    }
-
-
-
 
     static List<int> SetListInOrder(int count)
     {
